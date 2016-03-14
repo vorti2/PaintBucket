@@ -10,11 +10,11 @@ import UIKit
 
 public extension UIImage {
     
-    public func pbk_imageByReplacingColorAt(point: CGPoint, withColor: UIColor, tolerance: Int, contiguous: Bool) -> UIImage {
-        return self.pbk_imageByReplacingColorAt(Point(point), withColor: withColor, tolerance: tolerance, contiguous: contiguous)
+    public func pbk_imageByReplacingColorAt(point: CGPoint, withColor: UIColor, tolerance: Int) -> UIImage {
+        return self.pbk_imageByReplacingColorAt(Point(point), withColor: withColor, tolerance: tolerance)
     }
     
-    private func pbk_imageByReplacingColorAt(point: Point, withColor: UIColor, tolerance: Int, contiguous: Bool) -> UIImage {
+    private func pbk_imageByReplacingColorAt(point: Point, withColor: UIColor, tolerance: Int) -> UIImage {
         
         let cgImage = self.CGImage
         let imageWidth = Int(self.size.width * self.scale)

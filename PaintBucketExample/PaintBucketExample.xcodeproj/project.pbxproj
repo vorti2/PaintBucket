@@ -1,0 +1,379 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		A0A705161C96FDF800FEECCB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0A705151C96FDF800FEECCB /* AppDelegate.swift */; };
+		A0A705181C96FDF800FEECCB /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0A705171C96FDF800FEECCB /* ViewController.swift */; };
+		A0A7051B1C96FDF800FEECCB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A0A705191C96FDF800FEECCB /* Main.storyboard */; };
+		A0A7051D1C96FDF800FEECCB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A0A7051C1C96FDF800FEECCB /* Assets.xcassets */; };
+		A0A705201C96FDF800FEECCB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A0A7051E1C96FDF800FEECCB /* LaunchScreen.storyboard */; };
+		A0A705341C97024800FEECCB /* PaintBucket.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A0A7052E1C97022A00FEECCB /* PaintBucket.framework */; };
+		A0A705351C97024800FEECCB /* PaintBucket.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A0A7052E1C97022A00FEECCB /* PaintBucket.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		A0A7052D1C97022A00FEECCB /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A0A705281C97022A00FEECCB /* PaintBucket.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = A0FE684D1C9649FB0043D777;
+			remoteInfo = PaintBucket;
+		};
+		A0A7052F1C97022A00FEECCB /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A0A705281C97022A00FEECCB /* PaintBucket.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = A0FE68571C9649FB0043D777;
+			remoteInfo = PaintBucketTests;
+		};
+		A0A705361C97024800FEECCB /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A0A705281C97022A00FEECCB /* PaintBucket.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = A0FE684C1C9649FB0043D777;
+			remoteInfo = PaintBucket;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		A0A705381C97024800FEECCB /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				A0A705351C97024800FEECCB /* PaintBucket.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		A0A705121C96FDF800FEECCB /* PaintBucketExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PaintBucketExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		A0A705151C96FDF800FEECCB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		A0A705171C96FDF800FEECCB /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		A0A7051A1C96FDF800FEECCB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		A0A7051C1C96FDF800FEECCB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		A0A7051F1C96FDF800FEECCB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		A0A705211C96FDF800FEECCB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A0A705281C97022A00FEECCB /* PaintBucket.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = PaintBucket.xcodeproj; path = /Users/jackflintermann/Developer/PaintBucket/PaintBucket.xcodeproj; sourceTree = "<absolute>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		A0A7050F1C96FDF800FEECCB /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A0A705341C97024800FEECCB /* PaintBucket.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		A0A705091C96FDF800FEECCB = {
+			isa = PBXGroup;
+			children = (
+				A0A705281C97022A00FEECCB /* PaintBucket.xcodeproj */,
+				A0A705141C96FDF800FEECCB /* PaintBucketExample */,
+				A0A705131C96FDF800FEECCB /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		A0A705131C96FDF800FEECCB /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				A0A705121C96FDF800FEECCB /* PaintBucketExample.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		A0A705141C96FDF800FEECCB /* PaintBucketExample */ = {
+			isa = PBXGroup;
+			children = (
+				A0A705151C96FDF800FEECCB /* AppDelegate.swift */,
+				A0A705171C96FDF800FEECCB /* ViewController.swift */,
+				A0A705191C96FDF800FEECCB /* Main.storyboard */,
+				A0A7051C1C96FDF800FEECCB /* Assets.xcassets */,
+				A0A7051E1C96FDF800FEECCB /* LaunchScreen.storyboard */,
+				A0A705211C96FDF800FEECCB /* Info.plist */,
+			);
+			path = PaintBucketExample;
+			sourceTree = "<group>";
+		};
+		A0A705291C97022A00FEECCB /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				A0A7052E1C97022A00FEECCB /* PaintBucket.framework */,
+				A0A705301C97022A00FEECCB /* PaintBucketTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		A0A705111C96FDF800FEECCB /* PaintBucketExample */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A0A705241C96FDF800FEECCB /* Build configuration list for PBXNativeTarget "PaintBucketExample" */;
+			buildPhases = (
+				A0A7050E1C96FDF800FEECCB /* Sources */,
+				A0A7050F1C96FDF800FEECCB /* Frameworks */,
+				A0A705101C96FDF800FEECCB /* Resources */,
+				A0A705381C97024800FEECCB /* Embed Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				A0A705371C97024800FEECCB /* PBXTargetDependency */,
+			);
+			name = PaintBucketExample;
+			productName = PaintBucketExample;
+			productReference = A0A705121C96FDF800FEECCB /* PaintBucketExample.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		A0A7050A1C96FDF800FEECCB /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0720;
+				LastUpgradeCheck = 0720;
+				ORGANIZATIONNAME = jflinter;
+				TargetAttributes = {
+					A0A705111C96FDF800FEECCB = {
+						CreatedOnToolsVersion = 7.2.1;
+					};
+				};
+			};
+			buildConfigurationList = A0A7050D1C96FDF800FEECCB /* Build configuration list for PBXProject "PaintBucketExample" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = A0A705091C96FDF800FEECCB;
+			productRefGroup = A0A705131C96FDF800FEECCB /* Products */;
+			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = A0A705291C97022A00FEECCB /* Products */;
+					ProjectRef = A0A705281C97022A00FEECCB /* PaintBucket.xcodeproj */;
+				},
+			);
+			projectRoot = "";
+			targets = (
+				A0A705111C96FDF800FEECCB /* PaintBucketExample */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		A0A7052E1C97022A00FEECCB /* PaintBucket.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = PaintBucket.framework;
+			remoteRef = A0A7052D1C97022A00FEECCB /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		A0A705301C97022A00FEECCB /* PaintBucketTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = PaintBucketTests.xctest;
+			remoteRef = A0A7052F1C97022A00FEECCB /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
+
+/* Begin PBXResourcesBuildPhase section */
+		A0A705101C96FDF800FEECCB /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A0A705201C96FDF800FEECCB /* LaunchScreen.storyboard in Resources */,
+				A0A7051D1C96FDF800FEECCB /* Assets.xcassets in Resources */,
+				A0A7051B1C96FDF800FEECCB /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		A0A7050E1C96FDF800FEECCB /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A0A705181C96FDF800FEECCB /* ViewController.swift in Sources */,
+				A0A705161C96FDF800FEECCB /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		A0A705371C97024800FEECCB /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = PaintBucket;
+			targetProxy = A0A705361C97024800FEECCB /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		A0A705191C96FDF800FEECCB /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				A0A7051A1C96FDF800FEECCB /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		A0A7051E1C96FDF800FEECCB /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				A0A7051F1C96FDF800FEECCB /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		A0A705221C96FDF800FEECCB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		A0A705231C96FDF800FEECCB /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		A0A705251C96FDF800FEECCB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
+				INFOPLIST_FILE = PaintBucketExample/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.jflinter.PaintBucketExample;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		A0A705261C96FDF800FEECCB /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
+				INFOPLIST_FILE = PaintBucketExample/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.jflinter.PaintBucketExample;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		A0A7050D1C96FDF800FEECCB /* Build configuration list for PBXProject "PaintBucketExample" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A0A705221C96FDF800FEECCB /* Debug */,
+				A0A705231C96FDF800FEECCB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A0A705241C96FDF800FEECCB /* Build configuration list for PBXNativeTarget "PaintBucketExample" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A0A705251C96FDF800FEECCB /* Debug */,
+				A0A705261C96FDF800FEECCB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = A0A7050A1C96FDF800FEECCB /* Project object */;
+}
