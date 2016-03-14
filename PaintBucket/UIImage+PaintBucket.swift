@@ -17,8 +17,8 @@ public extension UIImage {
     private func pbk_imageByReplacingColorAt(point: Point, withColor: UIColor, tolerance: Int, contiguous: Bool) -> UIImage {
         
         let cgImage = self.CGImage
-        let imageWidth = Int(self.size.width)
-        let imageHeight = Int(self.size.height)
+        let imageWidth = Int(self.size.width * self.scale)
+        let imageHeight = Int(self.size.height * self.scale)
 //        let imageWidth = Int(CGImageGetWidth(cgImage))
 //        let imageHeight = Int(CGImageGetHeight(cgImage))
         let colorSpace = CGColorSpaceCreateDeviceRGB()
@@ -38,8 +38,8 @@ public extension UIImage {
         }
         
         let imageRef = CGBitmapContextCreateImage(context)!
-        return UIImage(CGImage: imageRef)
-//        return UIImage(CGImage: imageRef, scale: UIScreen.mainScreen().scale, orientation: UIImageOrientation.Up)
+//        return UIImage(CGImage: imageRef)
+        return UIImage(CGImage: imageRef, scale: self.scale, orientation: UIImageOrientation.Up)
     }
     
     private func pbx_indicesToModify(startingPoint: Point, imageWidth: Int, imageHeight: Int, tolerance: Int, pixelBuffer: UnsafeMutablePointer<UInt32>) -> NSIndexSet {
