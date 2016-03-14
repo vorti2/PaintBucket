@@ -18,6 +18,32 @@ class PaintBucketTests: XCTestCase {
         XCTAssert(expected.pixelsEqualToImage(transformed))
     }
     
+    func testTolerance() {
+        let color1 = UIColor(red: 1.0, green: 1.0, blue: 254.0/255.0, alpha: 1.0)
+        let color2 = UIColor(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
+        let color3 = UIColor.redColor()
+        let image = ImageBuilder().addColor(color1).addColor(color2).image
+        let expected = ImageBuilder().addColor(color3).addColor(color2).image
+        let transformed = image.pbk_imageByReplacingColorAt(CGPointMake(0, 0), withColor: color3, tolerance: 0, contiguous: false)
+        let data1 = UIImagePNGRepresentation(expected)!
+        let data2 = UIImagePNGRepresentation(transformed)!
+        XCTAssert(data1.isEqualToData(data2))
+        XCTAssert(expected.pixelsEqualToImage(transformed))
+    }
+    
+    func testTolerance_High() {
+        let color1 = UIColor(red: 1.0, green: 1.0, blue: 254.0/255.0, alpha: 1.0)
+        let color2 = UIColor(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
+        let color3 = UIColor.redColor()
+        let image = ImageBuilder().addColor(color1).addColor(color2).image
+        let expected = ImageBuilder().addColor(color3).image
+        let transformed = image.pbk_imageByReplacingColorAt(CGPointMake(0, 0), withColor: color3, tolerance: 2, contiguous: false)
+        let data1 = UIImagePNGRepresentation(expected)!
+        let data2 = UIImagePNGRepresentation(transformed)!
+        XCTAssert(data1.isEqualToData(data2))
+        XCTAssert(expected.pixelsEqualToImage(transformed))
+    }
+    
     func testBasicSquare() {
         let image = ImageBuilder().addColor(.redColor()).addColor(.greenColor()).image
         let expected = ImageBuilder().addColor(.blueColor()).addColor(.greenColor()).image
