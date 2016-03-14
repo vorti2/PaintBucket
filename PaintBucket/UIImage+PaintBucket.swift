@@ -158,8 +158,8 @@ struct Pixel: Equatable {
     func diff(other: Pixel) -> Int {
         return [
             componentDiff(self.r, other.r),
-            componentDiff(self.g, other.g) +
-            componentDiff(self.b, other.b) +
+            componentDiff(self.g, other.g),
+            componentDiff(self.b, other.b),
             componentDiff(self.a, other.a)
         ].map(Int.init).reduce(0, combine: +)
     }
