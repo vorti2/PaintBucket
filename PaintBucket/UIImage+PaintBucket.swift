@@ -17,8 +17,10 @@ public extension UIImage {
     private func pbk_imageByReplacingColorAt(point: Point, withColor: UIColor, tolerance: Int, contiguous: Bool) -> UIImage {
         
         let cgImage = self.CGImage
-        let imageWidth = Int(CGImageGetWidth(cgImage))
-        let imageHeight = Int(CGImageGetHeight(cgImage))
+        let imageWidth = Int(self.size.width)
+        let imageHeight = Int(self.size.height)
+//        let imageWidth = Int(CGImageGetWidth(cgImage))
+//        let imageHeight = Int(CGImageGetHeight(cgImage))
         let colorSpace = CGColorSpaceCreateDeviceRGB()
         
         let context = CGBitmapContextCreate(nil, imageWidth, imageHeight, 8, imageWidth * 4, colorSpace, CGBitmapInfo.ByteOrder32Little.rawValue | CGImageAlphaInfo.PremultipliedFirst.rawValue)!
