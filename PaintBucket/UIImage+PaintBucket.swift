@@ -8,9 +8,9 @@
 
 import UIKit
 
-extension UIImage {
+public extension UIImage {
     
-    func pbk_imageByReplacingColorAt(point: CGPoint, withColor: UIColor, tolerance: Int, contiguous: Bool) -> UIImage {
+    public func pbk_imageByReplacingColorAt(point: CGPoint, withColor: UIColor, tolerance: Int, contiguous: Bool) -> UIImage {
         return self.pbk_imageByReplacingColorAt(Point(point), withColor: withColor, tolerance: tolerance, contiguous: contiguous)
     }
     
@@ -86,7 +86,7 @@ extension UIImage {
         return pixelsSeen.copy() as! NSIndexSet
     }
     
-    static func pbk_pixelAtIndex(index: Int, _ pixelBuffer: UnsafePointer<UInt32>) -> Pixel? {
+    internal static func pbk_pixelAtIndex(index: Int, _ pixelBuffer: UnsafePointer<UInt32>) -> Pixel? {
         let pixelIndex = pixelBuffer + index
         return Pixel(memory: pixelIndex.memory)
     }
