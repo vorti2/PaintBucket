@@ -18,6 +18,36 @@ class PaintBucketTests: XCTestCase {
         XCTAssert(expected.pixelsEqualToImage(transformed))
     }
     
+    func testTinySquare() {
+        let image = ImageBuilder(edgeLength: 4).addColor(.redColor()).addColor(.greenColor()).image
+        let expected = ImageBuilder(edgeLength: 4).addColor(.blueColor()).addColor(.greenColor()).image
+        let transformed = image.pbk_imageByReplacingColorAt(CGPointMake(0, 0), withColor: UIColor.blueColor(), tolerance: 100)
+        let data1 = UIImagePNGRepresentation(expected)!
+        let data2 = UIImagePNGRepresentation(transformed)!
+        XCTAssert(data1.isEqualToData(data2))
+        XCTAssert(expected.pixelsEqualToImage(transformed))
+    }
+    
+    func testTinySquare_CenterCoordinate() {
+        let image = ImageBuilder(edgeLength: 5).addColor(.redColor()).addColor(.greenColor()).image
+        let expected = ImageBuilder(edgeLength: 5).addColor(.redColor()).image
+        let transformed = image.pbk_imageByReplacingColorAt(CGPointMake(2, 2), withColor: UIColor.redColor(), tolerance: 100)
+        let data1 = UIImagePNGRepresentation(expected)!
+        let data2 = UIImagePNGRepresentation(transformed)!
+        XCTAssert(data1.isEqualToData(data2))
+        XCTAssert(expected.pixelsEqualToImage(transformed))
+    }
+    
+    func testTinySquare_Boundary() {
+        let image = ImageBuilder(edgeLength: 9).addColor(.blueColor()).addColor(.greenColor()).image
+        let expected = ImageBuilder(edgeLength: 9).addColor(.greenColor()).image
+        let transformed = image.pbk_imageByReplacingColorAt(CGPointMake(1, 1), withColor: UIColor.greenColor(), tolerance: 100)
+        let data1 = UIImagePNGRepresentation(expected)!
+        let data2 = UIImagePNGRepresentation(transformed)!
+        XCTAssert(data1.isEqualToData(data2))
+        XCTAssert(expected.pixelsEqualToImage(transformed))
+    }
+    
     func testTolerance() {
         let color1 = UIColor(red: 1.0, green: 1.0, blue: 254.0/255.0, alpha: 1.0)
         let color2 = UIColor(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
@@ -67,7 +97,7 @@ class PaintBucketTests: XCTestCase {
     func testBasicSquare_Boundary1() {
         let image = ImageBuilder().addColor(.redColor()).addColor(.greenColor()).image
         let expected = ImageBuilder().addColor(.blueColor()).addColor(.greenColor()).image
-        let transformed = image.pbk_imageByReplacingColorAt(CGPointMake(9, 9), withColor: UIColor.blueColor(), tolerance: 100)
+        let transformed = image.pbk_imageByReplacingColorAt(CGPointMake(10, 40), withColor: UIColor.blueColor(), tolerance: 100)
         let data1 = UIImagePNGRepresentation(expected)!
         let data2 = UIImagePNGRepresentation(transformed)!
         XCTAssert(data1.isEqualToData(data2))
@@ -77,7 +107,7 @@ class PaintBucketTests: XCTestCase {
     func testBasicSquare_Boundary2() {
         let image = ImageBuilder().addColor(.redColor()).addColor(.greenColor()).image
         let expected = ImageBuilder().addColor(.redColor()).addColor(.blueColor()).image
-        let transformed = image.pbk_imageByReplacingColorAt(CGPointMake(10, 10), withColor: UIColor.blueColor(), tolerance: 100)
+        let transformed = image.pbk_imageByReplacingColorAt(CGPointMake(25, 50), withColor: UIColor.blueColor(), tolerance: 100)
         let data1 = UIImagePNGRepresentation(expected)!
         let data2 = UIImagePNGRepresentation(transformed)!
         XCTAssert(data1.isEqualToData(data2))
@@ -102,18 +132,23 @@ class PaintBucketTests: XCTestCase {
 }
 
 class ImageBuilder {
+    let edgeLength: CGFloat
+    init(edgeLength: CGFloat = 100) {
+        self.edgeLength = edgeLength
+    }
     var squareColors: [UIColor] = []
     func addColor(color: UIColor) -> ImageBuilder {
         self.squareColors.append(color)
         return self
     }
     var image: UIImage {
-        UIGraphicsBeginImageContext(CGSizeMake(100, 100))
+        UIGraphicsBeginImageContext(CGSizeMake(self.edgeLength, self.edgeLength))
         let context = UIGraphicsGetCurrentContext()
         for (i, color) in self.squareColors.enumerate() {
             CGContextSetFillColorWithColor(context, color.CGColor)
-            let beginningRect = CGRectMake(0, 0, 100, 100)
-            CGContextFillRect(context, CGRectInset(beginningRect, CGFloat(i * 10), CGFloat(i * 10)))
+            let beginningRect = CGRectMake(0, 0, self.edgeLength, self.edgeLength)
+            let inset = CGFloat(Int(CGFloat(i) * (self.edgeLength / CGFloat(self.squareColors.count))) / 2)
+            CGContextFillRect(context, CGRectInset(beginningRect, inset, inset))
         }
         let image = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()

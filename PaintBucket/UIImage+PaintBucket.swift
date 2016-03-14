@@ -25,6 +25,14 @@ class ImageBuffer {
         self.pixelBuffer = UnsafeMutablePointer<UInt32>(CGBitmapContextGetData(self.context))
     }
     
+    func indexFrom(point: Point) -> Int {
+        return indexFrom(point.x, point.y)
+    }
+    
+    func indexFrom(x: Int, _ y: Int) -> Int {
+        return x + (self.imageWidth * y)
+    }
+    
     func indicesToModify(startingPoint: Point, tolerance: Int) -> NSIndexSet {
         func indexToX(index: Int) -> Int {
             return index % imageWidth
@@ -32,10 +40,6 @@ class ImageBuffer {
         
         func indexToY(index: Int) -> Int {
             return index / imageWidth
-        }
-        
-        func indexFrom(point: Point) -> Int {
-            return point.x + (self.imageWidth * point.y)
         }
         
         let pixelsToExamine = NSMutableIndexSet()
@@ -77,6 +81,78 @@ class ImageBuffer {
         return pixelsSeen.copy() as! NSIndexSet
     }
     
+    func differenceAtPoint(x: Int, _ y: Int, toPixel pixel: Pixel) -> Int {
+        let index = indexFrom(x, y)
+        let newPixel = self[index]
+        return pixel.diff(newPixel)
+    }
+    
+    func scanline_replaceColor(color: UIColor, startingAtPoint point: Point, withColor replacementColor: UIColor, tolerance: Int) {
+
+        let originalColorPixel = Pixel(color: color)
+        let replacementPixel = Pixel(color: replacementColor)
+        if differenceAtPoint(point.x, point.y, toPixel: originalColorPixel) > tolerance {
+            return
+        }
+        if differenceAtPoint(point.x, point.y, toPixel: replacementPixel) == 0 {
+            return
+        }
+        
+        func testPixelAtPoint(x: Int, _ y: Int) -> Bool {
+            return differenceAtPoint(x, y, toPixel: originalColorPixel) <= tolerance
+        }
+        
+        self[indexFrom(point)] = replacementPixel
+        
+        let y = point.y
+        var minX = point.x - 1
+        var maxX = point.x + 1
+        while minX >= 0 && testPixelAtPoint(minX, y) {
+            let index = indexFrom(minX, y)
+            self[index] = replacementPixel
+            minX -= 1
+        }
+        while maxX < imageWidth && testPixelAtPoint(maxX, y) {
+            let index = indexFrom(maxX, y)
+            self[index] = replacementPixel
+            maxX += 1
+        }
+        
+        //above
+        if y < imageHeight - 1{
+            minX = point.x
+            while minX >= 0 && !testPixelAtPoint(minX, y) {
+                if testPixelAtPoint(minX, y + 1) {
+                    self.scanline_replaceColor(color, startingAtPoint: Point(minX, y + 1), withColor: replacementColor, tolerance: tolerance)
+                }
+                minX -= 1
+            }
+            maxX = point.x + 1
+            while maxX < imageWidth && !testPixelAtPoint(maxX, y) {
+                if testPixelAtPoint(maxX, y + 1) {
+                    self.scanline_replaceColor(color, startingAtPoint: Point(maxX, y + 1), withColor: replacementColor, tolerance: tolerance)
+                }
+                maxX += 1
+            }
+        }
+        if y > 0 {
+            minX = point.x
+            while minX >= 0 && !testPixelAtPoint(minX, y) {
+                if testPixelAtPoint(minX, y - 1) {
+                    self.scanline_replaceColor(color, startingAtPoint: Point(minX, y - 1), withColor: replacementColor, tolerance: tolerance)
+                }
+                minX -= 1
+            }
+            maxX = point.x + 1
+            while maxX < imageWidth && !testPixelAtPoint(maxX, y) {
+                if testPixelAtPoint(maxX, y - 1) {
+                    self.scanline_replaceColor(color, startingAtPoint: Point(maxX, y - 1), withColor: replacementColor, tolerance: tolerance)
+                }
+                maxX += 1
+            }
+        }
+    }
+    
     func replaceColorStartingAt(point: Point, withColor: UIColor, tolerance: Int) {
         let destinationPixel = Pixel(color: withColor)
         let indices = self.indicesToModify(point, tolerance: tolerance)
@@ -110,7 +186,11 @@ public extension UIImage {
     public func pbk_imageByReplacingColorAt(point: Point, withColor: UIColor, tolerance: Int) -> UIImage {
         
         let imageBuffer = ImageBuffer(image: self.CGImage!)
-        imageBuffer.replaceColorStartingAt(point, withColor: withColor, tolerance: tolerance)
+        let pixel = imageBuffer[imageBuffer.indexFrom(point)]
+        let color = pixel.color
+        imageBuffer.scanline_replaceColor(color, startingAtPoint: point, withColor: withColor, tolerance: tolerance)
+        
+//        imageBuffer.replaceColorStartingAt(point, withColor: withColor, tolerance: tolerance)
         return UIImage(CGImage: imageBuffer.image, scale: self.scale, orientation: UIImageOrientation.Up)
     }
 }
@@ -156,6 +236,10 @@ public struct Pixel: Equatable {
         self.g = UInt8(g * 255)
         self.b = UInt8(b * 255)
         self.a = UInt8(a * 255)
+    }
+    
+    var color: UIColor {
+        return UIColor(red: CGFloat(self.r) / 255, green: CGFloat(self.g) / 255, blue: CGFloat(self.b) / 255, alpha: CGFloat(self.a) / 255)
     }
     
     var uInt32Value: UInt32 {
