@@ -7,7 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		A0A705041C96ACFE00FEECCB /* temp@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A0A705031C96ACFE00FEECCB /* temp@2x.png */; };
+		A0A705071C96B04B00FEECCB /* test_output@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A0A705051C96B04B00FEECCB /* test_output@2x.png */; };
+		A0A705081C96B04B00FEECCB /* test.png in Resources */ = {isa = PBXBuildFile; fileRef = A0A705061C96B04B00FEECCB /* test.png */; };
 		A0FE68511C9649FB0043D777 /* PaintBucket.h in Headers */ = {isa = PBXBuildFile; fileRef = A0FE68501C9649FB0043D777 /* PaintBucket.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A0FE68581C9649FB0043D777 /* PaintBucket.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A0FE684D1C9649FB0043D777 /* PaintBucket.framework */; };
 		A0FE685D1C9649FB0043D777 /* PaintBucketTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0FE685C1C9649FB0043D777 /* PaintBucketTests.swift */; };
@@ -25,7 +26,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		A0A705031C96ACFE00FEECCB /* temp@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "temp@2x.png"; sourceTree = "<group>"; };
+		A0A705051C96B04B00FEECCB /* test_output@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "test_output@2x.png"; sourceTree = "<group>"; };
+		A0A705061C96B04B00FEECCB /* test.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = test.png; sourceTree = "<group>"; };
 		A0FE684D1C9649FB0043D777 /* PaintBucket.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = PaintBucket.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A0FE68501C9649FB0043D777 /* PaintBucket.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PaintBucket.h; sourceTree = "<group>"; };
 		A0FE68521C9649FB0043D777 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -86,8 +88,9 @@
 			isa = PBXGroup;
 			children = (
 				A0FE685C1C9649FB0043D777 /* PaintBucketTests.swift */,
-				A0A705031C96ACFE00FEECCB /* temp@2x.png */,
 				A0FE685E1C9649FB0043D777 /* Info.plist */,
+				A0A705051C96B04B00FEECCB /* test_output@2x.png */,
+				A0A705061C96B04B00FEECCB /* test.png */,
 			);
 			path = PaintBucketTests;
 			sourceTree = "<group>";
@@ -190,7 +193,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A0A705041C96ACFE00FEECCB /* temp@2x.png in Resources */,
+				A0A705071C96B04B00FEECCB /* test_output@2x.png in Resources */,
+				A0A705081C96B04B00FEECCB /* test.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

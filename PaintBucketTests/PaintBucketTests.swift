@@ -11,10 +11,11 @@ import XCTest
 
 class PaintBucketTests: XCTestCase {
     
-    func testLoadedImage() {
-        let image = UIImage(named: "temp", inBundle: NSBundle(forClass: self.dynamicType), compatibleWithTraitCollection: nil)!
+    func pending_testLoadedImage() {
+        let image = UIImage(named: "test", inBundle: NSBundle(forClass: self.dynamicType), compatibleWithTraitCollection: nil)!
+        let expected = UIImage(named: "test_output", inBundle: NSBundle(forClass: self.dynamicType), compatibleWithTraitCollection: nil)!
         let transformed = image.pbk_imageByReplacingColorAt(CGPointMake(1,1), withColor: UIColor.clearColor(), tolerance: 100, contiguous: false)
-        XCTAssertEqual(image.size, transformed.size)
+        XCTAssert(expected.pixelsEqualToImage(transformed))
     }
     
     func testBasicSquare() {
