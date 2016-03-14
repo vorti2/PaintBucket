@@ -21,6 +21,36 @@ class PaintBucketTests: XCTestCase {
         XCTAssert(expected.pixelsEqualToImage(transformed))
     }
     
+    func testBasicSquare_CenterCoordinate() {
+        let image = ImageBuilder().addColor(.redColor()).addColor(.greenColor()).image
+        let expected = ImageBuilder().addColor(.redColor()).addColor(.blueColor()).image
+        let transformed = image.pbk_imageByReplacingColorAt(CGPointMake(50, 50), withColor: UIColor.blueColor(), tolerance: 100, contiguous: false)
+        let data1 = UIImagePNGRepresentation(expected)!
+        let data2 = UIImagePNGRepresentation(transformed)!
+        XCTAssert(data1.isEqualToData(data2))
+        XCTAssert(expected.pixelsEqualToImage(transformed))
+    }
+    
+    func testBasicSquare_Boundary1() {
+        let image = ImageBuilder().addColor(.redColor()).addColor(.greenColor()).image
+        let expected = ImageBuilder().addColor(.blueColor()).addColor(.greenColor()).image
+        let transformed = image.pbk_imageByReplacingColorAt(CGPointMake(9, 9), withColor: UIColor.blueColor(), tolerance: 100, contiguous: false)
+        let data1 = UIImagePNGRepresentation(expected)!
+        let data2 = UIImagePNGRepresentation(transformed)!
+        XCTAssert(data1.isEqualToData(data2))
+        XCTAssert(expected.pixelsEqualToImage(transformed))
+    }
+    
+    func testBasicSquare_Boundary2() {
+        let image = ImageBuilder().addColor(.redColor()).addColor(.greenColor()).image
+        let expected = ImageBuilder().addColor(.redColor()).addColor(.blueColor()).image
+        let transformed = image.pbk_imageByReplacingColorAt(CGPointMake(10, 10), withColor: UIColor.blueColor(), tolerance: 100, contiguous: false)
+        let data1 = UIImagePNGRepresentation(expected)!
+        let data2 = UIImagePNGRepresentation(transformed)!
+        XCTAssert(data1.isEqualToData(data2))
+        XCTAssert(expected.pixelsEqualToImage(transformed))
+    }
+    
     func testPixelWithColor() {
         let pixel = Pixel(color: UIColor.blueColor())
         XCTAssertEqual(pixel.r, 0)
