@@ -36,7 +36,7 @@ public extension UIImage {
         }
         
         let imageRef = CGBitmapContextCreateImage(context)!
-        return UIImage(CGImage: imageRef)
+        return UIImage(CGImage: imageRef, scale: UIScreen.mainScreen().scale, orientation: UIImageOrientation.Up)
     }
     
     private func pbx_indicesToModify(startingPoint: Point, imageWidth: Int, imageHeight: Int, tolerance: Int, pixelBuffer: UnsafeMutablePointer<UInt32>) -> NSIndexSet {
