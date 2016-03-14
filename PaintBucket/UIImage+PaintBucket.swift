@@ -14,7 +14,7 @@ public extension UIImage {
         return self.pbk_imageByReplacingColorAt(Point(point), withColor: withColor, tolerance: tolerance)
     }
     
-    private func pbk_imageByReplacingColorAt(point: Point, withColor: UIColor, tolerance: Int) -> UIImage {
+    public func pbk_imageByReplacingColorAt(point: Point, withColor: UIColor, tolerance: Int) -> UIImage {
         
         let cgImage = self.CGImage
         let imageWidth = Int(self.size.width * self.scale)
@@ -39,7 +39,7 @@ public extension UIImage {
         return UIImage(CGImage: imageRef, scale: self.scale, orientation: UIImageOrientation.Up)
     }
     
-    private func pbx_indicesToModify(startingPoint: Point, imageWidth: Int, imageHeight: Int, tolerance: Int, pixelBuffer: UnsafeMutablePointer<UInt32>) -> NSIndexSet {
+    public func pbx_indicesToModify(startingPoint: Point, imageWidth: Int, imageHeight: Int, tolerance: Int, pixelBuffer: UnsafeMutablePointer<UInt32>) -> NSIndexSet {
         
         func indexToX(index: Int) -> Int {
             return index % imageWidth
@@ -67,11 +67,13 @@ public extension UIImage {
                 pixelsSeen.addIndex(index)
                 let x = indexToX(index)
                 let y = indexToY(index)
-                let pointTuples = [(x+1, y), (x-1, y), (x, y+1), (x, y-1)]
-                let points: [Point] = pointTuples.map { x, y in
-                    return Point(x, y)
+                var nextPoints: [Point] = []
+                let rawPointTuples = [(x+1, y), (x-1, y), (x, y+1), (x, y-1)]
+                for (x, y) in rawPointTuples {
+                    if x >= 0 && y >= 0 && x < imageWidth && y < imageHeight {
+                        nextPoints.append(Point(x, y))
+                    }
                 }
-                let nextPoints = points.filter { $0.x >= 0 }.filter { $0.y >= 0 }.filter { $0.x < imageWidth }.filter { $0.y < imageHeight }
                 for nextPoint in nextPoints {
                     let nextIndex = UIImage.pbk_indexFrom(nextPoint, imageWidth)
                     if !pixelsSeen.containsIndex(nextIndex) {
@@ -86,21 +88,21 @@ public extension UIImage {
         return pixelsSeen.copy() as! NSIndexSet
     }
     
-    internal static func pbk_pixelAtIndex(index: Int, _ pixelBuffer: UnsafePointer<UInt32>) -> Pixel? {
+    public static func pbk_pixelAtIndex(index: Int, _ pixelBuffer: UnsafePointer<UInt32>) -> Pixel? {
         let pixelIndex = pixelBuffer + index
         return Pixel(memory: pixelIndex.memory)
     }
     
-    private func pbk_setPixel(pixel: Pixel, atIndex: Int, inBuffer: UnsafeMutablePointer<UInt32>) {
+    public func pbk_setPixel(pixel: Pixel, atIndex: Int, inBuffer: UnsafeMutablePointer<UInt32>) {
         inBuffer[atIndex] = pixel.uInt32Value
     }
     
-    private static func pbk_indexFrom(point: Point, _ imageWidth: Int) -> Int {
+    public static func pbk_indexFrom(point: Point, _ imageWidth: Int) -> Int {
         return point.x + (point.y * imageWidth)
     }
 }
 
-struct Point {
+public struct Point {
     let x, y: Int
     
     init(_ x: Int, _ y: Int) {
@@ -114,7 +116,7 @@ struct Point {
     }
 }
 
-struct Pixel: Equatable {
+public struct Pixel: Equatable {
     let r, g, b, a: UInt8
     
     init(_ r: UInt8, _ g: UInt8, _ b: UInt8, _ a: UInt8) {
@@ -156,18 +158,16 @@ struct Pixel: Equatable {
     }
     
     func diff(other: Pixel) -> Int {
-        return [
-            componentDiff(self.r, other.r),
-            componentDiff(self.g, other.g),
-            componentDiff(self.b, other.b),
-            componentDiff(self.a, other.a)
-        ].map(Int.init).reduce(0, combine: +)
+        return Int(componentDiff(self.r, other.r)) +
+            Int(componentDiff(self.g, other.g)) +
+            Int(componentDiff(self.b, other.b)) +
+            Int(componentDiff(self.a, other.a))
     }
     
     
 }
 
-func ==(lhs: Pixel, rhs: Pixel) -> Bool {
+public func ==(lhs: Pixel, rhs: Pixel) -> Bool {
     let success = (lhs.r == rhs.r) && (lhs.g == rhs.g) && (lhs.b == rhs.b) && (lhs.a == rhs.a)
     if (!success) {
         print("womp")
