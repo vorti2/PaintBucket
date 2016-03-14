@@ -8,39 +8,24 @@
 
 import UIKit
 
-public extension UIImage {
+class ImageBuffer {
+    let context: CGContextRef
+    let pixelBuffer: UnsafeMutablePointer<UInt32>
+    let imageWidth: Int
+    let imageHeight: Int
     
-    public func pbk_imageByReplacingColorAt(point: CGPoint, withColor: UIColor, tolerance: Int) -> UIImage {
-        return self.pbk_imageByReplacingColorAt(Point(point), withColor: withColor, tolerance: tolerance)
-    }
-    
-    public func pbk_imageByReplacingColorAt(point: Point, withColor: UIColor, tolerance: Int) -> UIImage {
-        
-        let cgImage = self.CGImage
-        let imageWidth = Int(self.size.width * self.scale)
-        let imageHeight = Int(self.size.height * self.scale)
+    init(image: CGImageRef) {
+        self.imageWidth = Int(CGImageGetWidth(image))
+        self.imageHeight = Int(CGImageGetHeight(image))
         let colorSpace = CGColorSpaceCreateDeviceRGB()
         
-        let context = CGBitmapContextCreate(nil, imageWidth, imageHeight, 8, imageWidth * 4, colorSpace, CGBitmapInfo.ByteOrder32Little.rawValue | CGImageAlphaInfo.PremultipliedFirst.rawValue)!
-        CGContextDrawImage(context, CGRectMake(0, 0, CGFloat(imageWidth), CGFloat(imageHeight)), cgImage)
-
-        let pixelData = CGBitmapContextGetData(context)
-        let pixelBuffer = UnsafeMutablePointer<UInt32>(pixelData)
+        self.context = CGBitmapContextCreate(nil, imageWidth, imageHeight, 8, imageWidth * 4, colorSpace, CGBitmapInfo.ByteOrder32Little.rawValue | CGImageAlphaInfo.PremultipliedFirst.rawValue)!
+        CGContextDrawImage(self.context, CGRectMake(0, 0, CGFloat(imageWidth), CGFloat(imageHeight)), image)
         
-        let indices = pbx_indicesToModify(point, imageWidth: imageWidth, imageHeight: imageHeight, tolerance: tolerance, pixelBuffer: pixelBuffer)
-        
-        let destinationPixel = Pixel(color: withColor)
-        
-        for index in indices {
-            self.pbk_setPixel(destinationPixel, atIndex: index, inBuffer: pixelBuffer)
-        }
-        
-        let imageRef = CGBitmapContextCreateImage(context)!
-        return UIImage(CGImage: imageRef, scale: self.scale, orientation: UIImageOrientation.Up)
+        self.pixelBuffer = UnsafeMutablePointer<UInt32>(CGBitmapContextGetData(self.context))
     }
     
-    public func pbx_indicesToModify(startingPoint: Point, imageWidth: Int, imageHeight: Int, tolerance: Int, pixelBuffer: UnsafeMutablePointer<UInt32>) -> NSIndexSet {
-        
+    func indicesToModify(startingPoint: Point, tolerance: Int) -> NSIndexSet {
         func indexToX(index: Int) -> Int {
             return index % imageWidth
         }
@@ -49,18 +34,22 @@ public extension UIImage {
             return index / imageWidth
         }
         
+        func indexFrom(point: Point) -> Int {
+            return point.x + (self.imageWidth * point.y)
+        }
+        
         let pixelsToExamine = NSMutableIndexSet()
         let pixelsSeen = NSMutableIndexSet()
         
-        let startingIndex = UIImage.pbk_indexFrom(startingPoint, imageWidth)
-        guard let pixel = UIImage.pbk_pixelAtIndex(startingIndex, pixelBuffer) else { fatalError("womp") }
+        let startingIndex = indexFrom(startingPoint)
+        let pixel = self[startingIndex]
         
         pixelsToExamine.addIndex(startingIndex)
         while pixelsToExamine.count > 0 {
             let index = pixelsToExamine.firstIndex
             pixelsToExamine.removeIndex(index)
             
-            guard let newPixel = UIImage.pbk_pixelAtIndex(index, pixelBuffer) else { fatalError("womp") }
+            let newPixel = self[index]
             let diff = pixel.diff(newPixel)
             
             if diff <= tolerance {
@@ -75,7 +64,7 @@ public extension UIImage {
                     }
                 }
                 for nextPoint in nextPoints {
-                    let nextIndex = UIImage.pbk_indexFrom(nextPoint, imageWidth)
+                    let nextIndex = indexFrom(nextPoint)
                     if !pixelsSeen.containsIndex(nextIndex) {
                         if (nextIndex > imageHeight * imageWidth) {
                             print("Serious error!")
@@ -88,17 +77,41 @@ public extension UIImage {
         return pixelsSeen.copy() as! NSIndexSet
     }
     
-    public static func pbk_pixelAtIndex(index: Int, _ pixelBuffer: UnsafePointer<UInt32>) -> Pixel? {
-        let pixelIndex = pixelBuffer + index
-        return Pixel(memory: pixelIndex.memory)
+    func replaceColorStartingAt(point: Point, withColor: UIColor, tolerance: Int) {
+        let destinationPixel = Pixel(color: withColor)
+        let indices = self.indicesToModify(point, tolerance: tolerance)
+        for index in indices {
+            self[index] = destinationPixel
+        }
     }
     
-    public func pbk_setPixel(pixel: Pixel, atIndex: Int, inBuffer: UnsafeMutablePointer<UInt32>) {
-        inBuffer[atIndex] = pixel.uInt32Value
+    subscript(index: Int) -> Pixel {
+        get {
+            let pixelIndex = pixelBuffer + index
+            return Pixel(memory: pixelIndex.memory)
+        }
+        set(pixel) {
+            self.pixelBuffer[index] = pixel.uInt32Value
+        }
     }
     
-    public static func pbk_indexFrom(point: Point, _ imageWidth: Int) -> Int {
-        return point.x + (point.y * imageWidth)
+    var image: CGImageRef {
+        return CGBitmapContextCreateImage(self.context)!
+    }
+    
+}
+
+public extension UIImage {
+    
+    public func pbk_imageByReplacingColorAt(point: CGPoint, withColor: UIColor, tolerance: Int) -> UIImage {
+        return self.pbk_imageByReplacingColorAt(Point(point), withColor: withColor, tolerance: tolerance)
+    }
+    
+    public func pbk_imageByReplacingColorAt(point: Point, withColor: UIColor, tolerance: Int) -> UIImage {
+        
+        let imageBuffer = ImageBuffer(image: self.CGImage!)
+        imageBuffer.replaceColorStartingAt(point, withColor: withColor, tolerance: tolerance)
+        return UIImage(CGImage: imageBuffer.image, scale: self.scale, orientation: UIImageOrientation.Up)
     }
 }
 
