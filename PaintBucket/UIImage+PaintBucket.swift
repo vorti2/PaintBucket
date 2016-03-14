@@ -88,9 +88,6 @@ class ImageBuffer {
     }
     
     func scanline_replaceColor(color: UIColor, startingAtPoint point: Point, withColor replacementColor: UIColor, tolerance: Int) {
-
-        print("scanning at point: \(point)")
-        
         let originalColorPixel = Pixel(color: color)
         let replacementPixel = Pixel(color: replacementColor)
         if differenceAtPoint(point.x, point.y, toPixel: originalColorPixel) > tolerance {
