@@ -89,6 +89,8 @@ class ImageBuffer {
     
     func scanline_replaceColor(color: UIColor, startingAtPoint point: Point, withColor replacementColor: UIColor, tolerance: Int) {
 
+        print("scanning at point: \(point)")
+        
         let originalColorPixel = Pixel(color: color)
         let replacementPixel = Pixel(color: replacementColor)
         if differenceAtPoint(point.x, point.y, toPixel: originalColorPixel) > tolerance {
@@ -118,37 +120,12 @@ class ImageBuffer {
             maxX += 1
         }
         
-        //above
-        if y < imageHeight - 1{
-            minX = point.x
-            while minX >= 0 && !testPixelAtPoint(minX, y) {
-                if testPixelAtPoint(minX, y + 1) {
-                    self.scanline_replaceColor(color, startingAtPoint: Point(minX, y + 1), withColor: replacementColor, tolerance: tolerance)
-                }
-                minX -= 1
+        for x in ((minX + 1)...(maxX - 1)) {
+            if y < imageHeight - 1 && testPixelAtPoint(x, y + 1) {
+                self.scanline_replaceColor(color, startingAtPoint: Point(x, y + 1), withColor: replacementColor, tolerance: tolerance)
             }
-            maxX = point.x + 1
-            while maxX < imageWidth && !testPixelAtPoint(maxX, y) {
-                if testPixelAtPoint(maxX, y + 1) {
-                    self.scanline_replaceColor(color, startingAtPoint: Point(maxX, y + 1), withColor: replacementColor, tolerance: tolerance)
-                }
-                maxX += 1
-            }
-        }
-        if y > 0 {
-            minX = point.x
-            while minX >= 0 && !testPixelAtPoint(minX, y) {
-                if testPixelAtPoint(minX, y - 1) {
-                    self.scanline_replaceColor(color, startingAtPoint: Point(minX, y - 1), withColor: replacementColor, tolerance: tolerance)
-                }
-                minX -= 1
-            }
-            maxX = point.x + 1
-            while maxX < imageWidth && !testPixelAtPoint(maxX, y) {
-                if testPixelAtPoint(maxX, y - 1) {
-                    self.scanline_replaceColor(color, startingAtPoint: Point(maxX, y - 1), withColor: replacementColor, tolerance: tolerance)
-                }
-                maxX += 1
+            if y > 0 && testPixelAtPoint(x, y - 1) {
+                self.scanline_replaceColor(color, startingAtPoint: Point(x, y - 1), withColor: replacementColor, tolerance: tolerance)
             }
         }
     }
