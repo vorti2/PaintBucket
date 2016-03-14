@@ -19,12 +19,10 @@ public extension UIImage {
         let cgImage = self.CGImage
         let imageWidth = Int(self.size.width * self.scale)
         let imageHeight = Int(self.size.height * self.scale)
-//        let imageWidth = Int(CGImageGetWidth(cgImage))
-//        let imageHeight = Int(CGImageGetHeight(cgImage))
         let colorSpace = CGColorSpaceCreateDeviceRGB()
         
         let context = CGBitmapContextCreate(nil, imageWidth, imageHeight, 8, imageWidth * 4, colorSpace, CGBitmapInfo.ByteOrder32Little.rawValue | CGImageAlphaInfo.PremultipliedFirst.rawValue)!
-        CGContextDrawImage(context, CGRectMake(0, 0, size.width, size.height), cgImage)
+        CGContextDrawImage(context, CGRectMake(0, 0, CGFloat(imageWidth), CGFloat(imageHeight)), cgImage)
 
         let pixelData = CGBitmapContextGetData(context)
         let pixelBuffer = UnsafeMutablePointer<UInt32>(pixelData)
@@ -38,7 +36,6 @@ public extension UIImage {
         }
         
         let imageRef = CGBitmapContextCreateImage(context)!
-//        return UIImage(CGImage: imageRef)
         return UIImage(CGImage: imageRef, scale: self.scale, orientation: UIImageOrientation.Up)
     }
     
