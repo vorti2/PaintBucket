@@ -78,6 +78,9 @@ public extension UIImage {
                 for nextPoint in nextPoints {
                     let nextIndex = UIImage.pbk_indexFrom(nextPoint, imageWidth)
                     if !pixelsSeen.containsIndex(nextIndex) {
+                        if (nextIndex > imageHeight * imageWidth) {
+                            print("Serious error!")
+                        }
                         pixelsToExamine.addIndex(nextIndex)
                     }
                 }
