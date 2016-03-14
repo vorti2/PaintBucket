@@ -133,6 +133,7 @@ extension UIImage {
         for x in sequences.enumerate() {
             if x.element.0 != x.element.1 {
                 print("bad index: \(x.index)")
+                return false
             }
         }
         return true
