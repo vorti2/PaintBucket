@@ -33,8 +33,17 @@ class ImageBuffer {
         return x + (self.imageWidth * y)
     }
     
+    func pointFrom(index: Int) -> Point {
+        return Point(index % imageWidth, index / imageWidth)
+    }
+    
     func differenceAtPoint(x: Int, _ y: Int, toPixel pixel: Pixel) -> Int {
         let index = indexFrom(x, y)
+        let newPixel = self[index]
+        return pixel.diff(newPixel)
+    }
+    
+    func differenceAtIndex(index: Int, toPixel pixel: Pixel) -> Int {
         let newPixel = self[index]
         return pixel.diff(newPixel)
     }
@@ -45,22 +54,21 @@ class ImageBuffer {
             return differenceAtPoint(x, y, toPixel: colorPixel) <= tolerance
         }
         
-        var pointsToCheck = [startingPoint]
-        pointsToCheck.reserveCapacity(self.imageHeight * self.imageWidth)
-        var maxCount = 1
-        while let point = pointsToCheck.popLast() {
-            if pointsToCheck.count > maxCount {
-                maxCount = pointsToCheck.count
-            }
-            if differenceAtPoint(point.x, point.y, toPixel: colorPixel) > tolerance {
+        let indices = NSMutableIndexSet(index: indexFrom(startingPoint))
+        while indices.count > 0 {
+            let index = indices.firstIndex
+            indices.removeIndex(index)
+
+            if differenceAtIndex(index, toPixel: colorPixel) > tolerance {
                 continue
             }
-            if differenceAtPoint(point.x, point.y, toPixel: replacementPixel) == 0 {
+            if differenceAtIndex(index, toPixel: replacementPixel) == 0 {
                 continue
             }
 
-            self[indexFrom(point)] = replacementPixel
+            self[index] = replacementPixel
             
+            let point = pointFrom(index)
             let y = point.y
             var minX = point.x - 1
             var maxX = point.x + 1
@@ -77,10 +85,10 @@ class ImageBuffer {
             
             for x in ((minX + 1)...(maxX - 1)) {
                 if y < imageHeight - 1 && testPixelAtPoint(x, y + 1) {
-                    pointsToCheck.append(Point(x, y + 1))
+                    indices.addIndex(indexFrom(x, y + 1))
                 }
                 if y > 0 && testPixelAtPoint(x, y - 1) {
-                    pointsToCheck.append(Point(x, y - 1))
+                    indices.addIndex(indexFrom(x, y - 1))
                 }
             }
             

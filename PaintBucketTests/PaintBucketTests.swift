@@ -24,6 +24,7 @@ class PaintBucketTests: XCTestCase {
     func testLargeImagePerformance() {
         let image = UIImage(named: "benchmark", inBundle: NSBundle(forClass: self.dynamicType), compatibleWithTraitCollection: nil)!
         measureBlock {
+            // 3.034
             image.pbk_imageByReplacingColorAt(CGPointMake(1, 1), withColor: UIColor.clearColor(), tolerance: 70)
         }
     }
