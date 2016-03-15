@@ -39,41 +39,47 @@ class ImageBuffer {
         return pixel.diff(newPixel)
     }
     
-    func scanline_replaceColor(colorPixel: Pixel, startingAtPoint point: Point, withColor replacementPixel: Pixel, tolerance: Int) {
-        if differenceAtPoint(point.x, point.y, toPixel: colorPixel) > tolerance {
-            return
-        }
-        if differenceAtPoint(point.x, point.y, toPixel: replacementPixel) == 0 {
-            return
-        }
+    func scanline_replaceColor(colorPixel: Pixel, startingAtPoint startingPoint: Point, withColor replacementPixel: Pixel, tolerance: Int) {
         
         func testPixelAtPoint(x: Int, _ y: Int) -> Bool {
             return differenceAtPoint(x, y, toPixel: colorPixel) <= tolerance
         }
         
-        self[indexFrom(point)] = replacementPixel
-        
-        let y = point.y
-        var minX = point.x - 1
-        var maxX = point.x + 1
-        while minX >= 0 && testPixelAtPoint(minX, y) {
-            let index = indexFrom(minX, y)
-            self[index] = replacementPixel
-            minX -= 1
-        }
-        while maxX < imageWidth && testPixelAtPoint(maxX, y) {
-            let index = indexFrom(maxX, y)
-            self[index] = replacementPixel
-            maxX += 1
-        }
-        
-        for x in ((minX + 1)...(maxX - 1)) {
-            if y < imageHeight - 1 && testPixelAtPoint(x, y + 1) {
-                self.scanline_replaceColor(colorPixel, startingAtPoint: Point(x, y + 1), withColor: replacementPixel, tolerance: tolerance)
+        var pointsToCheck = [startingPoint]
+        pointsToCheck.reserveCapacity(self.imageHeight * self.imageWidth)
+        while let point = pointsToCheck.popLast() {
+            if differenceAtPoint(point.x, point.y, toPixel: colorPixel) > tolerance {
+                continue
             }
-            if y > 0 && testPixelAtPoint(x, y - 1) {
-                self.scanline_replaceColor(colorPixel, startingAtPoint: Point(x, y - 1), withColor: replacementPixel, tolerance: tolerance)
+            if differenceAtPoint(point.x, point.y, toPixel: replacementPixel) == 0 {
+                continue
             }
+
+            self[indexFrom(point)] = replacementPixel
+            
+            let y = point.y
+            var minX = point.x - 1
+            var maxX = point.x + 1
+            while minX >= 0 && testPixelAtPoint(minX, y) {
+                let index = indexFrom(minX, y)
+                self[index] = replacementPixel
+                minX -= 1
+            }
+            while maxX < imageWidth && testPixelAtPoint(maxX, y) {
+                let index = indexFrom(maxX, y)
+                self[index] = replacementPixel
+                maxX += 1
+            }
+            
+            for x in ((minX + 1)...(maxX - 1)) {
+                if y < imageHeight - 1 && testPixelAtPoint(x, y + 1) {
+                    pointsToCheck.append(Point(x, y + 1))
+                }
+                if y > 0 && testPixelAtPoint(x, y - 1) {
+                    pointsToCheck.append(Point(x, y - 1))
+                }
+            }
+            
         }
     }
     

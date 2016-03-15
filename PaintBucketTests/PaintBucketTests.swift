@@ -11,22 +11,23 @@ import XCTest
 
 class PaintBucketTests: XCTestCase {
     
-    func pending_testCrash() {
-        let image = UIImage(named: "crash", inBundle: NSBundle(forClass: self.dynamicType), compatibleWithTraitCollection: nil)!
+    func testCrash() {
+        let image = UIImage(named: "test", inBundle: NSBundle(forClass: self.dynamicType), compatibleWithTraitCollection: nil)!
         let expectation = self.expectationWithDescription("yay")
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) {
             image.pbk_imageByReplacingColorAt(CGPointMake(1, 1), withColor: UIColor.clearColor(), tolerance: 70)
             expectation.fulfill()
         }
         waitForExpectationsWithTimeout(10, handler: nil)
-        print("success!")
     }
     
-    func pending_testLoadedImage() {
+    func testLoadedImage() {
         let image = UIImage(named: "test", inBundle: NSBundle(forClass: self.dynamicType), compatibleWithTraitCollection: nil)!
         let expected = UIImage(named: "test_output", inBundle: NSBundle(forClass: self.dynamicType), compatibleWithTraitCollection: nil)!
         let transformed = image.pbk_imageByReplacingColorAt(CGPointMake(1,1), withColor: UIColor.clearColor(), tolerance: 100)
-        XCTAssert(expected.pixelsEqualToImage(transformed))
+        let data1 = UIImagePNGRepresentation(expected)!
+        let data2 = UIImagePNGRepresentation(transformed)!
+        XCTAssert(data1.isEqualToData(data2))
     }
     
     func testTinySquare() {
@@ -36,7 +37,6 @@ class PaintBucketTests: XCTestCase {
         let data1 = UIImagePNGRepresentation(expected)!
         let data2 = UIImagePNGRepresentation(transformed)!
         XCTAssert(data1.isEqualToData(data2))
-        XCTAssert(expected.pixelsEqualToImage(transformed))
     }
     
     func testTinySquare_CenterCoordinate() {
@@ -46,7 +46,6 @@ class PaintBucketTests: XCTestCase {
         let data1 = UIImagePNGRepresentation(expected)!
         let data2 = UIImagePNGRepresentation(transformed)!
         XCTAssert(data1.isEqualToData(data2))
-        XCTAssert(expected.pixelsEqualToImage(transformed))
     }
     
     func testTinySquare_Boundary() {
@@ -56,7 +55,6 @@ class PaintBucketTests: XCTestCase {
         let data1 = UIImagePNGRepresentation(expected)!
         let data2 = UIImagePNGRepresentation(transformed)!
         XCTAssert(data1.isEqualToData(data2))
-        XCTAssert(expected.pixelsEqualToImage(transformed))
     }
     
     func testTolerance() {
@@ -69,7 +67,6 @@ class PaintBucketTests: XCTestCase {
         let data1 = UIImagePNGRepresentation(expected)!
         let data2 = UIImagePNGRepresentation(transformed)!
         XCTAssert(data1.isEqualToData(data2))
-        XCTAssert(expected.pixelsEqualToImage(transformed))
     }
     
     func testTolerance_High() {
@@ -82,7 +79,6 @@ class PaintBucketTests: XCTestCase {
         let data1 = UIImagePNGRepresentation(expected)!
         let data2 = UIImagePNGRepresentation(transformed)!
         XCTAssert(data1.isEqualToData(data2))
-        XCTAssert(expected.pixelsEqualToImage(transformed))
     }
     
     func testBasicSquare() {
@@ -92,7 +88,6 @@ class PaintBucketTests: XCTestCase {
         let data1 = UIImagePNGRepresentation(expected)!
         let data2 = UIImagePNGRepresentation(transformed)!
         XCTAssert(data1.isEqualToData(data2))
-        XCTAssert(expected.pixelsEqualToImage(transformed))
     }
     
     func testBasicSquare_CenterCoordinate() {
@@ -102,7 +97,6 @@ class PaintBucketTests: XCTestCase {
         let data1 = UIImagePNGRepresentation(expected)!
         let data2 = UIImagePNGRepresentation(transformed)!
         XCTAssert(data1.isEqualToData(data2))
-        XCTAssert(expected.pixelsEqualToImage(transformed))
     }
     
     func testBasicSquare_Boundary1() {
@@ -112,7 +106,6 @@ class PaintBucketTests: XCTestCase {
         let data1 = UIImagePNGRepresentation(expected)!
         let data2 = UIImagePNGRepresentation(transformed)!
         XCTAssert(data1.isEqualToData(data2))
-        XCTAssert(expected.pixelsEqualToImage(transformed))
     }
     
     func testBasicSquare_Boundary2() {
@@ -122,7 +115,6 @@ class PaintBucketTests: XCTestCase {
         let data1 = UIImagePNGRepresentation(expected)!
         let data2 = UIImagePNGRepresentation(transformed)!
         XCTAssert(data1.isEqualToData(data2))
-        XCTAssert(expected.pixelsEqualToImage(transformed))
     }
     
     func testPixelWithColor() {
@@ -164,57 +156,5 @@ class ImageBuilder {
         let image = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
         return image
-    }
-}
-
-//struct PixelSequence: SequenceType, Equatable {
-//    let image: UIImage
-//    func generate() -> PixelGenerator {
-//        return PixelGenerator(image: image)
-//    }
-//}
-//
-//class PixelGenerator: GeneratorType {
-//    var currentIndex: Int = 0
-//    let totalIndex: Int
-//    let context: CGContextRef
-//    let pixelBuffer: UnsafeMutablePointer<UInt32>
-//    init(image: UIImage) {
-//        let cgImage = image.CGImage
-//        let width = Int(image.size.width)
-//        let height = Int(image.size.height)
-//        let colorSpace = CGColorSpaceCreateDeviceRGB()
-//        
-//        self.context = CGBitmapContextCreate(nil, width, height, 8, width * 4, colorSpace, CGBitmapInfo.ByteOrder32Little.rawValue | CGImageAlphaInfo.PremultipliedFirst.rawValue)!
-//        CGContextDrawImage(context, CGRectMake(0, 0, image.size.width, image.size.height), cgImage)
-//        
-//        let pixelData = CGBitmapContextGetData(context)
-//        self.pixelBuffer = UnsafeMutablePointer<UInt32>(pixelData)
-//        self.totalIndex = Int(image.size.width * image.size.height)
-//    }
-//    
-//    typealias Element = Pixel
-//    func next() -> Pixel? {
-//        guard currentIndex < totalIndex else { return nil }
-//        let pixel = UIImage.pbk_pixelAtIndex(currentIndex, pixelBuffer)
-//        currentIndex += 1
-//        return pixel
-//    }
-//}
-//
-//func ==(lhs: PixelSequence, rhs: PixelSequence) -> Bool {
-//    return lhs.elementsEqual(rhs, isEquivalent: { $0 == $1 })
-//}
-//
-extension UIImage {
-    func pixelsEqualToImage(other: UIImage) -> Bool {
-//        let sequences = zip(PixelSequence(image: self), PixelSequence(image: other))
-//        for x in sequences.enumerate() {
-//            if x.element.0 != x.element.1 {
-//                print("bad index: \(x.index)")
-//                return false
-//            }
-//        }
-        return true
     }
 }
