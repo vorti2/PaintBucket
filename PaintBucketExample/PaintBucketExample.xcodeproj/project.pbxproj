@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A00170C71C983F0A004BA10A /* benchmark@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A00170C61C983F0A004BA10A /* benchmark@2x.png */; };
 		A0A705161C96FDF800FEECCB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0A705151C96FDF800FEECCB /* AppDelegate.swift */; };
 		A0A705181C96FDF800FEECCB /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0A705171C96FDF800FEECCB /* ViewController.swift */; };
 		A0A7051B1C96FDF800FEECCB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A0A705191C96FDF800FEECCB /* Main.storyboard */; };
@@ -55,6 +56,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		A00170C61C983F0A004BA10A /* benchmark@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "benchmark@2x.png"; path = "../../PaintBucketTests/benchmark@2x.png"; sourceTree = "<group>"; };
 		A0A705121C96FDF800FEECCB /* PaintBucketExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PaintBucketExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A0A705151C96FDF800FEECCB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A0A705171C96FDF800FEECCB /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -99,6 +101,7 @@
 			children = (
 				A0A705151C96FDF800FEECCB /* AppDelegate.swift */,
 				A0A705171C96FDF800FEECCB /* ViewController.swift */,
+				A00170C61C983F0A004BA10A /* benchmark@2x.png */,
 				A0A705191C96FDF800FEECCB /* Main.storyboard */,
 				A0A7051C1C96FDF800FEECCB /* Assets.xcassets */,
 				A0A7051E1C96FDF800FEECCB /* LaunchScreen.storyboard */,
@@ -199,6 +202,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A00170C71C983F0A004BA10A /* benchmark@2x.png in Resources */,
 				A0A705201C96FDF800FEECCB /* LaunchScreen.storyboard in Resources */,
 				A0A7051D1C96FDF800FEECCB /* Assets.xcassets in Resources */,
 				A0A7051B1C96FDF800FEECCB /* Main.storyboard in Resources */,

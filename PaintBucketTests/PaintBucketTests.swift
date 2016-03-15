@@ -21,6 +21,13 @@ class PaintBucketTests: XCTestCase {
         waitForExpectationsWithTimeout(10, handler: nil)
     }
     
+    func testLargeImagePerformance() {
+        let image = UIImage(named: "benchmark", inBundle: NSBundle(forClass: self.dynamicType), compatibleWithTraitCollection: nil)!
+        measureBlock {
+            image.pbk_imageByReplacingColorAt(CGPointMake(1, 1), withColor: UIColor.clearColor(), tolerance: 70)
+        }
+    }
+    
     func testLoadedImage() {
         let image = UIImage(named: "test", inBundle: NSBundle(forClass: self.dynamicType), compatibleWithTraitCollection: nil)!
         let expected = UIImage(named: "test_output", inBundle: NSBundle(forClass: self.dynamicType), compatibleWithTraitCollection: nil)!

@@ -18,7 +18,7 @@ class ViewController: UIViewController {
         self.view.backgroundColor = UIColor.orangeColor()
         self.view.addSubview(self.imageView)
         self.imageView.contentMode = .ScaleAspectFit
-        self.imageView.image = UIImage(named: "Crystal")?.pbk_imageByReplacingColorAt(CGPoint.zero, withColor: UIColor.clearColor(), tolerance: 10)
+        self.imageView.image = UIImage(named: "benchmark")?.pbk_imageByReplacingColorAt(CGPoint.zero, withColor: UIColor.clearColor(), tolerance: 10)
     }
 
     override func viewDidLayoutSubviews() {

@@ -47,7 +47,11 @@ class ImageBuffer {
         
         var pointsToCheck = [startingPoint]
         pointsToCheck.reserveCapacity(self.imageHeight * self.imageWidth)
+        var maxCount = 1
         while let point = pointsToCheck.popLast() {
+            if pointsToCheck.count > maxCount {
+                maxCount = pointsToCheck.count
+            }
             if differenceAtPoint(point.x, point.y, toPixel: colorPixel) > tolerance {
                 continue
             }
