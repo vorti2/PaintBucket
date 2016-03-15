@@ -11,6 +11,17 @@ import XCTest
 
 class PaintBucketTests: XCTestCase {
     
+    func pending_testCrash() {
+        let image = UIImage(named: "crash", inBundle: NSBundle(forClass: self.dynamicType), compatibleWithTraitCollection: nil)!
+        let expectation = self.expectationWithDescription("yay")
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) {
+            image.pbk_imageByReplacingColorAt(CGPointMake(1, 1), withColor: UIColor.clearColor(), tolerance: 70)
+            expectation.fulfill()
+        }
+        waitForExpectationsWithTimeout(10, handler: nil)
+        print("success!")
+    }
+    
     func pending_testLoadedImage() {
         let image = UIImage(named: "test", inBundle: NSBundle(forClass: self.dynamicType), compatibleWithTraitCollection: nil)!
         let expected = UIImage(named: "test_output", inBundle: NSBundle(forClass: self.dynamicType), compatibleWithTraitCollection: nil)!
