@@ -142,15 +142,31 @@ public struct Pixel: Equatable {
     }
     
     init(color: UIColor) {
-        var r: CGFloat = 0
-        var g: CGFloat = 0
-        var b: CGFloat = 0
-        var a: CGFloat = 0
-        color.getRed(&r, green: &g, blue: &b, alpha: &a)
-        self.r = UInt8(r * 255)
-        self.g = UInt8(g * 255)
-        self.b = UInt8(b * 255)
-        self.a = UInt8(a * 255)
+        let model = CGColorSpaceGetModel(CGColorGetColorSpace(color.CGColor))
+        if model == .Monochrome {
+            var white: CGFloat = 0
+            var alpha: CGFloat = 0
+            color.getWhite(&white, alpha: &alpha)
+            self.r = UInt8(white * 255)
+            self.g = UInt8(white * 255)
+            self.b = UInt8(white * 255)
+            self.a = UInt8(alpha * 255)
+        } else if model == .RGB {
+            var r: CGFloat = 0
+            var g: CGFloat = 0
+            var b: CGFloat = 0
+            var a: CGFloat = 0
+            color.getRed(&r, green: &g, blue: &b, alpha: &a)
+            self.r = UInt8(r * 255)
+            self.g = UInt8(g * 255)
+            self.b = UInt8(b * 255)
+            self.a = UInt8(a * 255)
+        } else {
+            self.r = 0
+            self.g = 0
+            self.b = 0
+            self.a = 0
+        }
     }
     
     var color: UIColor {
