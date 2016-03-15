@@ -124,7 +124,7 @@ public struct Point {
     }
 }
 
-public struct Pixel: Equatable {
+public struct Pixel {
     let r, g, b, a: UInt8
     
     init(_ r: UInt8, _ g: UInt8, _ b: UInt8, _ a: UInt8) {
@@ -174,31 +174,23 @@ public struct Pixel: Equatable {
     }
     
     var uInt32Value: UInt32 {
-        var total = UInt32(self.a) << 24
+        var total = (UInt32(self.a) << 24)
         total += (UInt32(self.r) << 16)
         total += (UInt32(self.g) << 8)
         total += (UInt32(self.b) << 0)
         return total
     }
     
-    private func componentDiff(l: UInt8, _ r: UInt8) -> UInt8 {
+    private static func componentDiff(l: UInt8, _ r: UInt8) -> UInt8 {
         return max(l, r) - min(l, r)
     }
     
     func diff(other: Pixel) -> Int {
-        return Int(componentDiff(self.r, other.r)) +
-            Int(componentDiff(self.g, other.g)) +
-            Int(componentDiff(self.b, other.b)) +
-            Int(componentDiff(self.a, other.a))
+        return Int(Pixel.componentDiff(self.r, other.r)) +
+            Int(Pixel.componentDiff(self.g, other.g)) +
+            Int(Pixel.componentDiff(self.b, other.b)) +
+            Int(Pixel.componentDiff(self.a, other.a))
     }
     
     
-}
-
-public func ==(lhs: Pixel, rhs: Pixel) -> Bool {
-    let success = (lhs.r == rhs.r) && (lhs.g == rhs.g) && (lhs.b == rhs.b) && (lhs.a == rhs.a)
-    if (!success) {
-        print("womp")
-    }
-    return success
 }
