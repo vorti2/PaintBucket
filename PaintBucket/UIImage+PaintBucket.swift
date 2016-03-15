@@ -39,8 +39,7 @@ class ImageBuffer {
         return pixel.diff(newPixel)
     }
     
-    func scanline_replaceColor(colorPixel: Pixel, startingAtPoint point: Point, withColor replacementColor: UIColor, tolerance: Int) {
-        let replacementPixel = Pixel(color: replacementColor)
+    func scanline_replaceColor(colorPixel: Pixel, startingAtPoint point: Point, withColor replacementPixel: Pixel, tolerance: Int) {
         if differenceAtPoint(point.x, point.y, toPixel: colorPixel) > tolerance {
             return
         }
@@ -70,10 +69,10 @@ class ImageBuffer {
         
         for x in ((minX + 1)...(maxX - 1)) {
             if y < imageHeight - 1 && testPixelAtPoint(x, y + 1) {
-                self.scanline_replaceColor(colorPixel, startingAtPoint: Point(x, y + 1), withColor: replacementColor, tolerance: tolerance)
+                self.scanline_replaceColor(colorPixel, startingAtPoint: Point(x, y + 1), withColor: replacementPixel, tolerance: tolerance)
             }
             if y > 0 && testPixelAtPoint(x, y - 1) {
-                self.scanline_replaceColor(colorPixel, startingAtPoint: Point(x, y - 1), withColor: replacementColor, tolerance: tolerance)
+                self.scanline_replaceColor(colorPixel, startingAtPoint: Point(x, y - 1), withColor: replacementPixel, tolerance: tolerance)
             }
         }
     }
@@ -104,7 +103,8 @@ public extension UIImage {
         
         let imageBuffer = ImageBuffer(image: self.CGImage!)
         let pixel = imageBuffer[imageBuffer.indexFrom(point)]
-        imageBuffer.scanline_replaceColor(pixel, startingAtPoint: point, withColor: withColor, tolerance: tolerance)
+        let replacementPixel = Pixel(color: withColor)
+        imageBuffer.scanline_replaceColor(pixel, startingAtPoint: point, withColor: replacementPixel, tolerance: tolerance)
         
         return UIImage(CGImage: imageBuffer.image, scale: self.scale, orientation: UIImageOrientation.Up)
     }
