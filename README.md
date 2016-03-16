@@ -25,6 +25,7 @@ Thanks to the always-amazing [Mike Ash](https://mikeash.com/pyblog/friday-qa-201
 PRs welcome - I'd ask that you open an issue before blindly sending PRs my way just to make sure we agree that your idea is a Good Thing. To get you started, if someone wants to add some kind of clever anti-aliasing to this, I'd sure love that.
 
 ## Installation
-Install it via [Carthage](https://github.com/Carthage/Carthage): just add `github "jflinter/PaintBucket", ~> 0.1` to your Cartfile.
+[Carthage](https://github.com/Carthage/Carthage): add `github "jflinter/PaintBucket", ~> 0.1` to your Cartfile.
+[CocoaPods](cocoapods.com): add `pod 'PaintBucket', '~> 0.1'` to your Podfile.
 
 ![](http://i.giphy.com/scEmJ6yaTmhrO.gif)
