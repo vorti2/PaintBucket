@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name = 'PaintBucket'
-  s.version = '0.1'
+  s.version = '0.1.1'
   s.license = 'MIT'
   s.summary = 'Like a bucket of paint, but on the Internet'
   s.homepage = 'https://github.com/jflinter/PaintBucket'
