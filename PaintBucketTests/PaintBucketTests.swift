@@ -11,7 +11,14 @@ import XCTest
 
 class PaintBucketTests: XCTestCase {
     
-    func testCrash() {
+    func benchmarkLargeImagePerformance() {
+        let image = UIImage(named: "benchmark", inBundle: NSBundle(forClass: self.dynamicType), compatibleWithTraitCollection: nil)!
+        measureBlock {
+            image.pbk_imageByReplacingColorAt(CGPointMake(1, 1), withColor: UIColor.clearColor(), tolerance: 70)
+        }
+    }
+    
+    func testLargeImage_backgroundThread() {
         let image = UIImage(named: "test", inBundle: NSBundle(forClass: self.dynamicType), compatibleWithTraitCollection: nil)!
         let expectation = self.expectationWithDescription("yay")
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) {
@@ -19,14 +26,6 @@ class PaintBucketTests: XCTestCase {
             expectation.fulfill()
         }
         waitForExpectationsWithTimeout(10, handler: nil)
-    }
-    
-    func testLargeImagePerformance() {
-        let image = UIImage(named: "benchmark", inBundle: NSBundle(forClass: self.dynamicType), compatibleWithTraitCollection: nil)!
-        measureBlock {
-            // 3.034
-            image.pbk_imageByReplacingColorAt(CGPointMake(1, 1), withColor: UIColor.clearColor(), tolerance: 70)
-        }
     }
     
     func testLoadedImage() {
