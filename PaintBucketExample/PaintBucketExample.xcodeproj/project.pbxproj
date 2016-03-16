@@ -7,34 +7,34 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0465AFAA1C99E5BE0029D301 /* PaintBucket.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0465AFA31C99E5A30029D301 /* PaintBucket.framework */; };
+		0465AFAB1C99E5BE0029D301 /* PaintBucket.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 0465AFA31C99E5A30029D301 /* PaintBucket.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		A00170C71C983F0A004BA10A /* benchmark@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A00170C61C983F0A004BA10A /* benchmark@2x.png */; };
 		A0A705161C96FDF800FEECCB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0A705151C96FDF800FEECCB /* AppDelegate.swift */; };
 		A0A705181C96FDF800FEECCB /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0A705171C96FDF800FEECCB /* ViewController.swift */; };
 		A0A7051B1C96FDF800FEECCB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A0A705191C96FDF800FEECCB /* Main.storyboard */; };
 		A0A7051D1C96FDF800FEECCB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A0A7051C1C96FDF800FEECCB /* Assets.xcassets */; };
 		A0A705201C96FDF800FEECCB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A0A7051E1C96FDF800FEECCB /* LaunchScreen.storyboard */; };
-		A0A705341C97024800FEECCB /* PaintBucket.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A0A7052E1C97022A00FEECCB /* PaintBucket.framework */; };
-		A0A705351C97024800FEECCB /* PaintBucket.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A0A7052E1C97022A00FEECCB /* PaintBucket.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		A0A7052D1C97022A00FEECCB /* PBXContainerItemProxy */ = {
+		0465AFA21C99E5A30029D301 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = A0A705281C97022A00FEECCB /* PaintBucket.xcodeproj */;
+			containerPortal = 0465AF9D1C99E5A30029D301 /* PaintBucket.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = A0FE684D1C9649FB0043D777;
 			remoteInfo = PaintBucket;
 		};
-		A0A7052F1C97022A00FEECCB /* PBXContainerItemProxy */ = {
+		0465AFA41C99E5A30029D301 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = A0A705281C97022A00FEECCB /* PaintBucket.xcodeproj */;
+			containerPortal = 0465AF9D1C99E5A30029D301 /* PaintBucket.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = A0FE68571C9649FB0043D777;
 			remoteInfo = PaintBucketTests;
 		};
-		A0A705361C97024800FEECCB /* PBXContainerItemProxy */ = {
+		0465AFAC1C99E5BE0029D301 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = A0A705281C97022A00FEECCB /* PaintBucket.xcodeproj */;
+			containerPortal = 0465AF9D1C99E5A30029D301 /* PaintBucket.xcodeproj */;
 			proxyType = 1;
 			remoteGlobalIDString = A0FE684C1C9649FB0043D777;
 			remoteInfo = PaintBucket;
@@ -48,7 +48,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				A0A705351C97024800FEECCB /* PaintBucket.framework in Embed Frameworks */,
+				0465AFAB1C99E5BE0029D301 /* PaintBucket.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -56,6 +56,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		0465AF9D1C99E5A30029D301 /* PaintBucket.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = PaintBucket.xcodeproj; path = ../PaintBucket.xcodeproj; sourceTree = "<group>"; };
 		A00170C61C983F0A004BA10A /* benchmark@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "benchmark@2x.png"; path = "../../PaintBucketTests/benchmark@2x.png"; sourceTree = "<group>"; };
 		A0A705121C96FDF800FEECCB /* PaintBucketExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PaintBucketExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A0A705151C96FDF800FEECCB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -64,7 +65,6 @@
 		A0A7051C1C96FDF800FEECCB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A0A7051F1C96FDF800FEECCB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A0A705211C96FDF800FEECCB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		A0A705281C97022A00FEECCB /* PaintBucket.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = PaintBucket.xcodeproj; path = /Users/jackflintermann/Developer/PaintBucket/PaintBucket.xcodeproj; sourceTree = "<absolute>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -72,17 +72,26 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A0A705341C97024800FEECCB /* PaintBucket.framework in Frameworks */,
+				0465AFAA1C99E5BE0029D301 /* PaintBucket.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0465AF9E1C99E5A30029D301 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				0465AFA31C99E5A30029D301 /* PaintBucket.framework */,
+				0465AFA51C99E5A30029D301 /* PaintBucketTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		A0A705091C96FDF800FEECCB = {
 			isa = PBXGroup;
 			children = (
-				A0A705281C97022A00FEECCB /* PaintBucket.xcodeproj */,
+				0465AF9D1C99E5A30029D301 /* PaintBucket.xcodeproj */,
 				A0A705141C96FDF800FEECCB /* PaintBucketExample */,
 				A0A705131C96FDF800FEECCB /* Products */,
 			);
@@ -110,15 +119,6 @@
 			path = PaintBucketExample;
 			sourceTree = "<group>";
 		};
-		A0A705291C97022A00FEECCB /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				A0A7052E1C97022A00FEECCB /* PaintBucket.framework */,
-				A0A705301C97022A00FEECCB /* PaintBucketTests.xctest */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -134,7 +134,7 @@
 			buildRules = (
 			);
 			dependencies = (
-				A0A705371C97024800FEECCB /* PBXTargetDependency */,
+				0465AFAD1C99E5BE0029D301 /* PBXTargetDependency */,
 			);
 			name = PaintBucketExample;
 			productName = PaintBucketExample;
@@ -169,8 +169,8 @@
 			projectDirPath = "";
 			projectReferences = (
 				{
-					ProductGroup = A0A705291C97022A00FEECCB /* Products */;
-					ProjectRef = A0A705281C97022A00FEECCB /* PaintBucket.xcodeproj */;
+					ProductGroup = 0465AF9E1C99E5A30029D301 /* Products */;
+					ProjectRef = 0465AF9D1C99E5A30029D301 /* PaintBucket.xcodeproj */;
 				},
 			);
 			projectRoot = "";
@@ -181,18 +181,18 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
-		A0A7052E1C97022A00FEECCB /* PaintBucket.framework */ = {
+		0465AFA31C99E5A30029D301 /* PaintBucket.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
 			path = PaintBucket.framework;
-			remoteRef = A0A7052D1C97022A00FEECCB /* PBXContainerItemProxy */;
+			remoteRef = 0465AFA21C99E5A30029D301 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		A0A705301C97022A00FEECCB /* PaintBucketTests.xctest */ = {
+		0465AFA51C99E5A30029D301 /* PaintBucketTests.xctest */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.cfbundle;
 			path = PaintBucketTests.xctest;
-			remoteRef = A0A7052F1C97022A00FEECCB /* PBXContainerItemProxy */;
+			remoteRef = 0465AFA41C99E5A30029D301 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
@@ -224,10 +224,10 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		A0A705371C97024800FEECCB /* PBXTargetDependency */ = {
+		0465AFAD1C99E5BE0029D301 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = PaintBucket;
-			targetProxy = A0A705361C97024800FEECCB /* PBXContainerItemProxy */;
+			targetProxy = 0465AFAC1C99E5BE0029D301 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
