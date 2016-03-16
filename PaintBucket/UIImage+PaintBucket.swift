@@ -20,18 +20,3 @@ public extension UIImage {
     }
     
 }
-
-public struct Point {
-    let x, y: Int
-    
-    init(_ x: Int, _ y: Int) {
-        self.x = x
-        self.y = y
-    }
-    
-    init(_ point: CGPoint) {
-        self.x = Int(point.x)
-        self.y = Int(point.y)
-    }
-}
-

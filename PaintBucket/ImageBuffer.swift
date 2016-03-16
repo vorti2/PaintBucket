@@ -25,16 +25,8 @@ class ImageBuffer {
         self.pixelBuffer = UnsafeMutablePointer<UInt32>(CGBitmapContextGetData(self.context))
     }
     
-    func indexFrom(point: Point) -> Int {
-        return indexFrom(point.x, point.y)
-    }
-    
     func indexFrom(x: Int, _ y: Int) -> Int {
         return x + (self.imageWidth * y)
-    }
-    
-    func pointFrom(index: Int) -> Point {
-        return Point(index % imageWidth, index / imageWidth)
     }
     
     func differenceAtPoint(x: Int, _ y: Int, toPixel pixel: Pixel) -> Int {
@@ -68,10 +60,10 @@ class ImageBuffer {
             
             self[index] = replacementPixel
             
-            let point = pointFrom(index)
-            let y = point.y
-            var minX = point.x - 1
-            var maxX = point.x + 1
+            let pointX = index % imageWidth
+            let y = index / imageWidth
+            var minX = pointX - 1
+            var maxX = pointX + 1
             while minX >= 0 && testPixelAtPoint(minX, y) {
                 let index = indexFrom(minX, y)
                 self[index] = replacementPixel

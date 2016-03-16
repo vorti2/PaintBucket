@@ -65,7 +65,7 @@ struct Pixel {
         return total
     }
     
-    private static func componentDiff(l: UInt8, _ r: UInt8) -> UInt8 {
+    static func componentDiff(l: UInt8, _ r: UInt8) -> UInt8 {
         return max(l, r) - min(l, r)
     }
     
