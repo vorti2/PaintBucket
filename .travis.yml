@@ -4,5 +4,5 @@ env:
 osx_image: xcode7.1
 language: objective-c
 before_install: "./ci_scripts/add_key.sh"
-script: xcodebuild test -project Dwifft.xcodeproj -scheme Dwifft -sdk iphonesimulator9.1
+script: xcodebuild test -project PaintBucket.xcodeproj -scheme PaintBucket -sdk iphonesimulator9.1
 after_script: "./ci_scripts/remove_key.sh"
