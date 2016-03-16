@@ -26,6 +26,7 @@ PRs welcome - I'd ask that you open an issue before blindly sending PRs my way j
 
 ## Installation
 [Carthage](https://github.com/Carthage/Carthage): add `github "jflinter/PaintBucket", ~> 0.1` to your Cartfile.
+
 [CocoaPods](cocoapods.com): add `pod 'PaintBucket', '~> 0.1'` to your Podfile.
 
 ![](http://i.giphy.com/scEmJ6yaTmhrO.gif)
