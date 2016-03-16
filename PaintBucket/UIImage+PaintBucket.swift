@@ -10,12 +10,7 @@ import UIKit
 
 public extension UIImage {
     
-    public func pbk_imageByReplacingColorAt(point: CGPoint, withColor: UIColor, tolerance: Int) -> UIImage {
-        return self.pbk_imageByReplacingColorAt(Point(point), withColor: withColor, tolerance: tolerance)
-    }
-    
-    public func pbk_imageByReplacingColorAt(point: Point, withColor: UIColor, tolerance: Int) -> UIImage {
-        
+    public func pbk_imageByReplacingColorAt(point: (Int, Int), withColor: UIColor, tolerance: Int) -> UIImage {
         let imageBuffer = ImageBuffer(image: self.CGImage!)
         let pixel = imageBuffer[imageBuffer.indexFrom(point)]
         let replacementPixel = Pixel(color: withColor)
@@ -23,6 +18,7 @@ public extension UIImage {
         
         return UIImage(CGImage: imageBuffer.image, scale: self.scale, orientation: UIImageOrientation.Up)
     }
+    
 }
 
 public struct Point {

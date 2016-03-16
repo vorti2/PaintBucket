@@ -48,7 +48,7 @@ class ImageBuffer {
         return pixel.diff(newPixel)
     }
     
-    func scanline_replaceColor(colorPixel: Pixel, startingAtPoint startingPoint: Point, withColor replacementPixel: Pixel, tolerance: Int) {
+    func scanline_replaceColor(colorPixel: Pixel, startingAtPoint startingPoint: (Int, Int), withColor replacementPixel: Pixel, tolerance: Int) {
         
         func testPixelAtPoint(x: Int, _ y: Int) -> Bool {
             return differenceAtPoint(x, y, toPixel: colorPixel) <= tolerance
