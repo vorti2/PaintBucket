@@ -40,16 +40,22 @@ class ImageBuffer {
         return pixel.diff(newPixel)
     }
     
-    func scanline_replaceColor(colorPixel: Pixel, startingAtPoint startingPoint: (Int, Int), withColor replacementPixel: Pixel, tolerance: Int) {
+    func scanline_replaceColor(colorPixel: Pixel, startingAtPoint startingPoint: (Int, Int), withColor replacementPixel: Pixel, tolerance: Int, antialias: Bool) {
         
         func testPixelAtPoint(x: Int, _ y: Int) -> Bool {
             return differenceAtPoint(x, y, toPixel: colorPixel) <= tolerance
         }
         
+        let seenIndices = NSMutableIndexSet()
         let indices = NSMutableIndexSet(index: indexFrom(startingPoint))
         while indices.count > 0 {
             let index = indices.firstIndex
             indices.removeIndex(index)
+            
+            if seenIndices.containsIndex(index) {
+                continue
+            }
+            seenIndices.addIndex(index)
             
             if differenceAtIndex(index, toPixel: colorPixel) > tolerance {
                 continue
@@ -58,29 +64,44 @@ class ImageBuffer {
                 continue
             }
             
-            self[index] = replacementPixel
-            
             let pointX = index % imageWidth
             let y = index / imageWidth
-            var minX = pointX - 1
+            var minX = pointX
             var maxX = pointX + 1
-            while minX >= 0 && testPixelAtPoint(minX, y) {
+            
+            while minX >= 0 {
                 let index = indexFrom(minX, y)
-                self[index] = replacementPixel
+                let pixel = self[index]
+                let diff = pixel.diff(colorPixel)
+                if diff > tolerance { break }
+                let alphaMultiplier = (tolerance == 0) ? 1 : CGFloat(diff) / CGFloat(tolerance)
+                let newPixel = antialias ? pixel.multiplyAlpha(alphaMultiplier).blend(replacementPixel) : replacementPixel
+                self[index] = newPixel
                 minX -= 1
             }
-            while maxX < imageWidth && testPixelAtPoint(maxX, y) {
+            while maxX < imageWidth {
                 let index = indexFrom(maxX, y)
-                self[index] = replacementPixel
+                let pixel = self[index]
+                let diff = pixel.diff(colorPixel)
+                if diff > tolerance { break }
+                let alphaMultiplier = (tolerance == 0) ? 1 : CGFloat(diff) / CGFloat(tolerance)
+                let newPixel = antialias ? pixel.multiplyAlpha(alphaMultiplier).blend(replacementPixel) : replacementPixel
+                self[index] = newPixel
                 maxX += 1
             }
             
             for x in ((minX + 1)...(maxX - 1)) {
-                if y < imageHeight - 1 && testPixelAtPoint(x, y + 1) {
-                    indices.addIndex(indexFrom(x, y + 1))
+                if y < imageHeight - 1 {
+                    let index = indexFrom(x, y + 1)
+                    if !seenIndices.containsIndex(index) && differenceAtIndex(index, toPixel: colorPixel) <= tolerance {
+                        indices.addIndex(index)
+                    }
                 }
-                if y > 0 && testPixelAtPoint(x, y - 1) {
-                    indices.addIndex(indexFrom(x, y - 1))
+                if y > 0 {
+                    let index = indexFrom(x, y - 1)
+                    if !seenIndices.containsIndex(index) && differenceAtIndex(index, toPixel: colorPixel) <= tolerance {
+                        indices.addIndex(index)
+                    }
                 }
             }
             

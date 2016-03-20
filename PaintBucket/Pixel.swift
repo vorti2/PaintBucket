@@ -69,11 +69,28 @@ struct Pixel {
         return max(l, r) - min(l, r)
     }
     
+    func multiplyAlpha(alpha: CGFloat) -> Pixel {
+        return Pixel(self.r, self.g, self.b, UInt8(CGFloat(self.a) * alpha))
+    }
+    
+    func blend(other: Pixel) -> Pixel {
+        let a1 = CGFloat(self.a) / 255.0
+        let a2 = CGFloat(other.a) / 255.0
+
+        return Pixel(
+            UInt8((a1 * CGFloat(self.r)) + (a2 * (1 - a1) * CGFloat(other.r))),
+            UInt8((a1 * CGFloat(self.g)) + (a2 * (1 - a1) * CGFloat(other.g))),
+            UInt8((a1 * CGFloat(self.b)) + (a2 * (1 - a1) * CGFloat(other.b))),
+            UInt8((255 * (a1 + a2 * (1 - a1))))
+        )
+    }
+    
     func diff(other: Pixel) -> Int {
-        return Int(Pixel.componentDiff(self.r, other.r)) +
-            Int(Pixel.componentDiff(self.g, other.g)) +
-            Int(Pixel.componentDiff(self.b, other.b)) +
-            Int(Pixel.componentDiff(self.a, other.a))
+        let r = Int(Pixel.componentDiff(self.r, other.r))
+        let g = Int(Pixel.componentDiff(self.g, other.g))
+        let b = Int(Pixel.componentDiff(self.b, other.b))
+        let a = Int(Pixel.componentDiff(self.a, other.a))
+        return r + g + b + a
     }
     
     
