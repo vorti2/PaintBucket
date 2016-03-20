@@ -90,7 +90,7 @@ struct Pixel {
         let g = Int(Pixel.componentDiff(self.g, other.g))
         let b = Int(Pixel.componentDiff(self.b, other.b))
         let a = Int(Pixel.componentDiff(self.a, other.a))
-        return r + g + b + a
+        return r*r + g*g + b*b + a*a
     }
     
     

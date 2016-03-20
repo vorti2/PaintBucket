@@ -60,9 +60,6 @@ class ImageBuffer {
             if differenceAtIndex(index, toPixel: colorPixel) > tolerance {
                 continue
             }
-            if differenceAtIndex(index, toPixel: replacementPixel) == 0 {
-                continue
-            }
             
             let pointX = index % imageWidth
             let y = index / imageWidth
